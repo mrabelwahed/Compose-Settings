@@ -60,9 +60,21 @@ jobs:
           ./gradlew bundleRelease
       - name: Sign Release
         uses: r0adkll/sign-android-release@v1
+        # ID used to access action output
+        id: sign_app
         with:
             releaseDirectory: app/build/outputs/bundle/release
             signingKeyBase64: ${{ secrets.KEYSTORE }}
             alias: ${{ secrets.KEY_ALIAS }}
             keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
             keyPassword: ${{ secrets.EY_PASSWORD }}
+
+      - uses: actions/upload-artifact@master
+        with:
+            name: release.apk
+            path: ${{steps.sign_app.outputs.signedReleaseFile}}
+
+      - uses: actions/upload-artifact@master
+        with:
+            name: mapping.txt
+            path: app/build/outputs/mapping/release/mapping.txt
