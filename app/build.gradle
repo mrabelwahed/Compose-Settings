@@ -19,15 +19,15 @@ android {
             useSupportLibrary true
         }
     }
-
-    signingConfigs {
-        release {
-            storeFile file(System.getenv("HOME") + "/keystores/ramadan")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
-        }
-    }
+// use this only if you want to sign locally
+//    signingConfigs {
+//        release {
+//            storeFile file(System.getenv("HOME") + "/keystores/ramadan")
+//            storePassword System.getenv("KEYSTORE_PASSWORD")
+//            keyAlias System.getenv("KEY_ALIAS")
+//            keyPassword System.getenv("KEY_PASSWORD")
+//        }
+//    }
 
     buildTypes {
         release {
@@ -38,7 +38,7 @@ android {
                     outputFileName = "${rootProject.name}_${versionName}.apk"
                 }
             }
-            signingConfig signingConfigs.release
+          //  signingConfig signingConfigs.release
         }
     }
 
